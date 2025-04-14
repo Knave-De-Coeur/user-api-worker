@@ -16,7 +16,7 @@ TEST_USER = "jonah+3567@fadir.com"
 TEST_PASS = "test1234"
 
 [[d1_databases]]
-binding = "DB"
+binding = "D1"
 database_name = "users"
 database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 migrations_table = "migrations"

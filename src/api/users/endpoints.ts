@@ -3,12 +3,13 @@ import { env } from 'hono/adapter'
 import { OpenAPIRoute } from 'chanfana';
 import { Context } from 'hono';
 import { RouteAuthType, RouteInfo, RouteMethod } from '../../helpers/RouteManager';
+import { UserSchema } from '../../types';
 
 export class GetUser extends OpenAPIRoute {
 	method = 'get'
 	path = '/users/:id'
 	responses = {
-		200: { description: 'User found', content: { 'application/json': { schema: z.object({ id: z.string(), name: z.string(), email: z.string() }) } } },
+		200: { description: 'User found', content: { 'application/json': UserSchema } },
 		404: { description: 'Not found' }
 	}
 
@@ -32,7 +33,7 @@ export class CreateUser extends OpenAPIRoute {
 	requestBody = {
 		content: {
 			'application/json': {
-				schema: z.object({ id: z.string(), name: z.string(), email: z.string().email() })
+				schema: UserSchema
 			}
 		}
 	}
@@ -42,6 +43,7 @@ export class CreateUser extends OpenAPIRoute {
 
 	async handler(c : Context) {
 		const { D1, KV } = env(c)
+		console.log("Hit here?")
 		const { id, name, email } = await c.req.json()
 		await D1.prepare('INSERT INTO users (id, name, email) VALUES (?, ?, ?)').bind(id, name, email).run()
 		await KV.put(`user:${id}`, JSON.stringify({ id, name, email }))
@@ -50,7 +52,7 @@ export class CreateUser extends OpenAPIRoute {
 
 	static route_info = {
 		method: RouteMethod.POST,
-		path: "/users/:id",
+		path: "/users",
 		authType: RouteAuthType.REQUIRED
 	} as RouteInfo
 }
@@ -61,7 +63,7 @@ export class UpdateUser extends OpenAPIRoute {
 	requestBody = {
 		content: {
 			'application/json': {
-				schema: z.object({ name: z.string(), email: z.string().email() })
+				schema: UserSchema
 			}
 		}
 	}

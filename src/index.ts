@@ -14,6 +14,11 @@ type Bindings = {
 const app = new OpenAPIHono<{ Bindings: Bindings }>()
 const routes = new RouteManager(getRoutesApi())
 
+// Home page route
+app.get('/', (c) => {
+	return c.text('Welcome to the User API Service!')
+})
+
 routes.registerPaths(app)
 
 app.doc('/docs', {

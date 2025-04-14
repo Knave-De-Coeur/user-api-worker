@@ -7,16 +7,21 @@
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
-		"cf-typegen": "wrangler types"
+		"migrate": "wrangler d1 migrations apply D1 --local",
+		"cf-typegen": "wrangler types",
+		"test:setup": "npx ts-node --esm scripts/setup.ts",
+		"test:teardown": "npx ts-node --esm scripts/teardown.ts"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.7.5",
+		"@cloudflare/vitest-pool-workers": "^0.7.8",
 		"@cloudflare/workers-types": "^4.20250414.0",
+		"@types/node": "^22.14.1",
 		"@types/service-worker-mock": "^2.0.4",
+		"@types/wait-on": "^5.3.4",
 		"node-fetch": "^3.3.2",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.8.3",
-		"vitest": "~3.0.7",
+		"vitest": "~3.0.0",
 		"wait-on": "^8.0.3",
 		"wrangler": "^4.10.0"
 	},
@@ -25,6 +30,7 @@
 		"@hono/zod-openapi": "^0.19.4",
 		"chanfana": "^2.8.0",
 		"hono": "^4.7.6",
+		"toml": "^3.0.0",
 		"zod": "^3.24.2"
 	}
 }

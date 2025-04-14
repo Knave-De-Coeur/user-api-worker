@@ -13,6 +13,7 @@
 		"module": "esnext",
     /* Specify how TypeScript looks up a file from a given module specifier. */
 		"moduleResolution": "node",
+		"esModuleInterop": true,
     /* Specify type package names to be included without being referenced in a source file. */
 		"types": [
 			"@types/node",
@@ -44,6 +45,6 @@
 		"sourceMap": true,
 		"outDir": ""
 	},
-	"exclude": ["node_modules", "dist", "tests", ".wrangler", "TestHelper.ts", "*.test.ts"],
-	"include": ["worker-configuration.d.ts","src", "scripts"]
+	"exclude": ["dist", "tests", ".wrangler", "*.test.ts", "vitest.config.ts"],
+	"include": ["worker-configuration.d.ts", "src", "scripts", "node_modules"]
 }
