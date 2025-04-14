@@ -1,3 +1,6 @@
+import { HonoOpenAPIRouterType } from 'chanfana';
+import { Bindings } from 'hono/dist/types/types';
+import { MyBindings } from '../index';
 
 export enum RouteAuthType {
 	NONE = 'none',
@@ -47,7 +50,7 @@ export class RouteManager {
 		return paths
 	}
 
-	registerPaths(openapi : any) {
+	registerPaths(openapi : HonoOpenAPIRouterType<{Bindings: MyBindings}>) {
 		if (this._routes.length > 0) {
 			this._routes.forEach(r => {
 				switch(r.route_info.method) {
