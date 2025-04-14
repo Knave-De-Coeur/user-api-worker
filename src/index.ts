@@ -1,9 +1,9 @@
-import { Hono } from 'hono'
 import { OpenAPIHono } from '@hono/zod-openapi'
-import { swaggerUI } from '@hono/swagger-ui'
 import { getRoutesApi } from './api/users';
 import { RouteManager } from './helpers/RouteManager';
 import { fromHono, HonoOpenAPIRouterType } from 'chanfana';
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 
 export type MyBindings = {
 	R2: R2Bucket,
@@ -12,7 +12,9 @@ export type MyBindings = {
 	AUTH_KEY_SECRET: string,
 }
 
-const app = new OpenAPIHono<{ Bindings: MyBindings }>()
+const app = new Hono<{ Bindings: MyBindings }>()
+app.use("*", cors())
+
 const routes = new RouteManager(getRoutesApi())
 
 // Home page route
@@ -44,9 +46,6 @@ openapi.registry.registerComponent(
 openapi.get("/docs", (c) => {
 	return c.redirect('/docs/')
 })
-
-openapi.get('/openapi.json', (c) => c.json(app.openapi))
-openapi.get('/docs-ui', swaggerUI({ url: '/openapi.json' }))
 
 routes.registerPaths(openapi)
 

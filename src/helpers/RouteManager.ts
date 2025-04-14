@@ -1,5 +1,4 @@
 import { HonoOpenAPIRouterType } from 'chanfana';
-import { Bindings } from 'hono/dist/types/types';
 import { MyBindings } from '../index';
 
 export enum RouteAuthType {
@@ -72,6 +71,7 @@ export class RouteManager {
 					default:
 						throw new Error(`unsupport route method ${r.route_info.method} ${r.route_info.path}`)
 				}
+				console.log(r.route_info.path, r)
 			})
 		}
 	}
