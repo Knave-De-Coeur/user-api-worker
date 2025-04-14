@@ -1,0 +1,38 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "user-api-service"
+main = "src/index.ts"
+compatibility_date = "2024-12-05"
+compatibility_flags = [ "nodejs_compat" ]
+
+[dev]
+port = 8937
+
+[observability]
+enabled = true
+
+[vars]
+AUTH_KEY_SECRET = "usersecret"
+TEST_USER = "jonah+3567@fadir.com"
+TEST_PASS = "test1234"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "users"
+database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+migrations_table = "migrations"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+preview_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "raw-users"
+preview_bucket_name = "raw-users-dev"
+
+#[build]
+#command = "tsc"
+
+#[site]
+#bucket = "./dist"

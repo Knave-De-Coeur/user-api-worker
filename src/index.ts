@@ -1,26 +1,30 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.jsonc`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { Hono } from 'hono'
+import { OpenAPIHono } from '@hono/zod-openapi'
+import { swaggerUI } from '@hono/swagger-ui'
+import { getRoutesApi } from './api/users';
+import { RouteManager } from './helpers/RouteManager';
 
-export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		const url = new URL(request.url);
-		switch (url.pathname) {
-			case '/message':
-				return new Response('Hello, World!');
-			case '/random':
-				return new Response(crypto.randomUUID());
-			default:
-				return new Response('Not Found', { status: 404 });
-		}
+type Bindings = {
+	R2: R2Bucket,
+	D1: D1Database,
+	KV: KVNamespace,
+	AUTH_KEY_SECRET: string,
+}
+
+const app = new OpenAPIHono<{ Bindings: Bindings }>()
+const routes = new RouteManager(getRoutesApi())
+
+routes.registerPaths(app)
+
+app.doc('/docs', {
+	openapi: '3.1.0',
+	info: {
+		title: 'User CRUD API',
+		version: '1.0.0',
 	},
-} satisfies ExportedHandler<Env>;
+})
+
+app.get('/openapi.json', (c) => c.json(app.openapi))
+app.get('/docs-ui', swaggerUI({ url: '/openapi.json' }))
+
+export default app

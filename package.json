@@ -12,8 +12,19 @@
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.7.5",
 		"@cloudflare/workers-types": "^4.20250414.0",
-		"typescript": "^5.5.2",
+		"@types/service-worker-mock": "^2.0.4",
+		"node-fetch": "^3.3.2",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.8.3",
 		"vitest": "~3.0.7",
+		"wait-on": "^8.0.3",
 		"wrangler": "^4.10.0"
+	},
+	"dependencies": {
+		"@hono/swagger-ui": "^0.5.1",
+		"@hono/zod-openapi": "^0.19.4",
+		"chanfana": "^2.8.0",
+		"hono": "^4.7.6",
+		"zod": "^3.24.2"
 	}
 }
