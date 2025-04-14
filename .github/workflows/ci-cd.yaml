@@ -28,4 +28,4 @@ jobs:
             - name: 🧪  Run unit + integration tests
               run: |
                   npx wrangler d1 migrations apply D1 --local || true
-                  npm run test:e2e
+                  npm run test
