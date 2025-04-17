@@ -13,7 +13,7 @@
 		"test:teardown": "npx ts-node --esm scripts/teardown.ts"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.7.8",
+		"@cloudflare/vitest-pool-workers": "^0.8.18",
 		"@cloudflare/workers-types": "^4.20250414.0",
 		"@types/node": "^22.14.1",
 		"@types/service-worker-mock": "^2.0.4",
