@@ -37,10 +37,10 @@ describe('User API (E2E Wrangler)', () => {
 			body: JSON.stringify({ id: 'u2', name: 'Bob', email: 'bob@x.com' })
 		})
 
-		expect(post.status).toBe(500)
+		expect(post.status).toBe(201)
 
-		// const res = await fetch(`${BASE_URL}/users/u2`)
-		// const user = await res.json() as User
-		// expect(user.name).toBe('Bob')
+		const res = await fetch(`${BASE_URL}/users/u2`)
+		const user = await res.json() as User
+		expect(user.name).toBe('Bob')
 	})
 })
