@@ -26,7 +26,6 @@
 		"wrangler": "^4.10.0"
 	},
 	"dependencies": {
-		"@hono/swagger-ui": "^0.5.1",
 		"@hono/zod-openapi": "^0.19.4",
 		"chanfana": "^2.8.0",
 		"hono": "^4.7.6",

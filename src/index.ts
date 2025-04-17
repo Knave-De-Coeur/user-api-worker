@@ -1,4 +1,3 @@
-import { OpenAPIHono } from '@hono/zod-openapi'
 import { getRoutesApi } from './api/users';
 import { RouteManager } from './helpers/RouteManager';
 import { fromHono, HonoOpenAPIRouterType } from 'chanfana';

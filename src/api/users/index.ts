@@ -1,6 +1,6 @@
 import { CreateUser, GetUser, UpdateUser, DeleteUser } from './endpoints';
+import { OpenAPIRoute, RouteOptions } from 'chanfana';
 
-// TODO: fix issue where endpoints aren't being registered and crash when called.
-export function getRoutesApi() {
+export function getRoutesApi(): (new (params: RouteOptions) => OpenAPIRoute)[]{
 	return [CreateUser, GetUser, UpdateUser, DeleteUser]
 }
